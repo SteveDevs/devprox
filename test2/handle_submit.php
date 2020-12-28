@@ -28,4 +28,4 @@ else if($_POST["number_nodes"] == 1){
 }
 
 //new Classes\RedBlackTree($_POST["number_nodes"]);
-new Classes\RedBlackTree3($_POST["number_nodes"]);
+new Classes\RedBlackTree($_POST["number_nodes"]);
