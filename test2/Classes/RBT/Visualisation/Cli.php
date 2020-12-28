@@ -16,6 +16,7 @@ use Classes\RBT\Model\TreeInterface as Tree;
  */
 class Cli
 {
+    public $tree_arr = [];
     /**
      * Simple recursive visualisation.
      *
@@ -55,4 +56,30 @@ class Cli
             $this->infixeRender($node->getChild(Node::POSITION_RIGHT), $indent.'  ');
         }
     }
+
+    public function getTree(Node $node)
+    {
+        if (!$node->isLeaf() && $node->haveChild(Node::POSITION_LEFT)) {
+            // Show left side first
+            $this->getTree($node->getChild(Node::POSITION_LEFT));
+        }
+
+        //$this->tree_arr[] = $node->getId();
+
+        if($node->haveChild(Node::POSITION_LEFT)){
+            $this->tree_arr[] = $node->getChild(Node::POSITION_LEFT)->getId();
+            //print_r($this->tree_arr)
+        }
+        if($node->haveChild(Node::POSITION_RIGHT)){
+            $this->tree_arr[] = $node->getChild(Node::POSITION_RIGHT)->getId();
+
+        }
+        
+
+
+        if (!$node->isLeaf() && $node->haveChild(Node::POSITION_RIGHT)) {
+            // Show left side first
+            $this->getTree($node->getChild(Node::POSITION_RIGHT));
+        }
+    } 
 }

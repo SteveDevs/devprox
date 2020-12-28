@@ -5,6 +5,7 @@ use Classes\CSV;
 use Classes\Random;
 use Classes\RBT\Node;
 use Classes\RBT\Tree;
+use Classes\RBT\Visualisation\Cli;
 
 
 class RedBlackTree {
@@ -13,8 +14,6 @@ class RedBlackTree {
      * @var TreeNode
      */
     public $tree;
-
-    private $tree_output = [];
 
     public function __construct($number_of_nodes)
     {
@@ -26,7 +25,7 @@ class RedBlackTree {
 
             $tree = new Tree();
             $random->generate();
-            $key = $random->days . ',' . $random->surname_letter . ',' . $random->name_letter;
+            $key = $random->days . ',' . $random->surname . ',' . $random->name;
             $node = new Node($key, NULL);
             $tree->insert($node);
             set_time_limit(999999999);
@@ -38,24 +37,21 @@ class RedBlackTree {
                 $random->generate();
 
                 //unique date + surname  + name
-                $key = $random->days . ',' . $random->surname_letter . ',' . $random->name_letter;
+                $key = $random->days . ',' . $random->surname . ',' . $random->name;
                 //check if unique
                 $node = new Node($key, NULL);
                 while($tree->insert($node) === 0){
                     $random->generate();
-                    $key = $random->days . $random->surname_letter . $random->name_letter;
+                    $key = $random->days . ',' . $random->surname . ',' . $random->name;
                     $node = new Node($key, NULL);
                 }
-            }
 
-        //$visualisation->render($tree);
-       
-        //exit();
-            //print_r($num);
-            //print_r('<br>');
-            //print_r(microtime(true) - $time_start);
-            //exit();
+
+            } 
+        $visualisation = new Cli();
+        $visualisation->getTree($tree->getRoot());
+            
         $csv = new CSV();
-        $csv->generateCsv($this->tree_output);
+        $csv->generateCsv($visualisation->tree_arr);
     }
 }
