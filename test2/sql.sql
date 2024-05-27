@@ -1,4 +1,4 @@
-USE steve_devprox;
+USE test;
 
 CREATE TABLE `csv_import` (
   `id` BIGINT NOT NULL,
