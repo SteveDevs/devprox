@@ -1,4 +1,4 @@
-USE steve_devprox;
+USE test;
 
 CREATE TABLE `user` (
   `id` BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
